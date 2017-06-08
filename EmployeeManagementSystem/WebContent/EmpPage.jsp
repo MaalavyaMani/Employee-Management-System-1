@@ -302,6 +302,10 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
    <td><input type="text" name="Reason"  placeholder = "">  </td>
 </tr>
 
+<tr>
+<td><input type = "hidden" name = "empid" value = "<%=emp%>"></td>
+</tr>
+
 </table>
 <br>
 <center><button type="submit" align = center class="w3-button w3-black ">Apply</button> </center>
