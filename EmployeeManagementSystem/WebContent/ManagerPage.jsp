@@ -328,12 +328,14 @@ html, body, h1, h2, h3, h4, h5, h6 {
 								<h1>Apply Leave</h1>
 							</div>
 							<br>
+							<form method = "post" action = "LeaveSheetServlet">
 							<table align=center style="width: 65%">
 								<tr align=center>
 									<td>Category :</td>
 									<td><input list="category" name="category"> <datalist
 											id="category">
 											<option value="CL">
+											<option value="SL">
 										</datalist></td>
 								</tr>
 
@@ -352,6 +354,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 								</tr>
 
 							</table>
+							</form>
 							<br>
 							<center>
 								<button type="submit" align=center class="w3-button w3-black ">Apply</button>
@@ -421,43 +424,41 @@ html, body, h1, h2, h3, h4, h5, h6 {
 					class="w3-button w3-display-topright w3-large">x</span>
 				<h2>Leave History</h2>
 			</div>
-			<br>
-			<center>
-				<fieldset style="width: 50%">
-					<legend>History / Summary</legend>
-					<div class="main-details">
-
-						<div class="salesDashBoardDropDown">
-							<form action="" method="post" name="yearform">
-								<!--<div  style="float: left;padding-top:5px;">Quarter : </div>-->
-								<div>
-									<select name="year" id="year" class="dropdown"
-										style="width: 150px;" onchange="this.form.submit();">
-										<option value="2016">2016</option>
-										<option value="2017" selected="selected">2017</option>
-										<option value="2018">2018</option>
-									</select>
-								</div>
-							</form>
-						</div>
-						<legend>Leave History</legend>
-						<table border="0" width="100%" cellspacing="0" cellpadding="0">
-							<thead>
-								<tr>
-									<th class="orange-gradient">Category</th>
-									<th class="orange-gradient">From Date</th>
-									<th class="orange-gradient">To Date</th>
-
-								</tr>
-							</thead>
-						</table>
-				</fieldset>
-				<br>
-			</center>
+			<br><br>
+			<sql:query dataSource = "${dbSource}" var = "leave" >
+           select  category , from_date , to_date from leave_sheet where emp_id = "<%= session.getAttribute("empid") %>";
+      </sql:query>
+      
+      <center><fieldset style="width:50%">
+				<legend>Leave History</legend>
+				<div class="main-details">
+					<table border="0" class="" width="100%" cellspacing="0" cellpadding="0"> 
+					<c:forEach var="row" items="${leave.rows}">
+						<thead>
+							<tr>
+								<th class="orange-gradient">Category</th>
+								<th class="orange-gradient">From Date</th>
+								<th class="orange-gradient">To Date</th>
+							</tr>
+						</thead>
+						
+						<tbody>
+						
+						<tr >
+						<td align="center"><c:out value="${row.category}" /></td>	
+						<td align="center"><c:out value="${row.from_date}" /></td>
+						<td align="center"><c:out value="${row.to_date}" /></td>
+						</tr>
+											 
+						</tbody>
+						
+						</c:forEach>
+					</table> </div> 
+					</fieldset> </center>
+			
 		</div>
 	</div>
-	</div>
-	</div>
+
 
 
 	<!---PayRoll Pop-->
@@ -485,8 +486,56 @@ html, body, h1, h2, h3, h4, h5, h6 {
 					class="w3-button w3-display-topright w3-large">x</span>
 				<h1>Project Details</h1>
 			</div>
-			<br>
-			<br>
+		<br><br>
+		
+		<table align=center style="width: 65%">
+		  <tr align = "center">
+		    <td>Project ID :</td>
+			<td><input list="projectid" name="projectid"> 
+			<datalist id="projectid">
+	     	  <option value="TUP0001">
+			  <option value="TUP0002">
+			  <option value="TUP0003">
+			  <option value="TUP0004">
+			</datalist></td>
+			<td><button type="submit" align=center class="w3-button w3-black ">Submit</button></td>
+		  </tr>
+		</table>
+		<br><br>
+		
+		<sql:query dataSource = "${dbSource}" var = "project" >
+           select  task_name , emp_id , num_of_hours , date  from time_sheet where emp_id = "<%= request.getAttribute("projectid") %>";
+      </sql:query>
+      
+      <center><fieldset style="width:50%">
+				<legend>Project Details</legend>
+				<div class="main-details">
+					<table border="0" class="" width="100%" cellspacing="0" cellpadding="0"> 
+					<c:forEach var="row" items="${project.rows}">
+						<thead>
+							<tr>
+								<th class="orange-gradient">Emp ID</th>
+								<th class="orange-gradient">Task </th>
+								<th class="orange-gradient">Hours Worked</th>
+								<th class="orange-gradient">Date</th>
+							</tr>
+						</thead>
+						
+						<tbody>
+						
+						<tr >
+						<td align="center"><c:out value="${row.emp_id}" /></td>	
+						<td align="center"><c:out value="${row.task_name}" /></td>
+						<td align="center"><c:out value="${row.num_of_hours}" /></td>
+						<td align="center"><c:out value="${row.date}" /></td>
+						</tr>
+											 
+						</tbody>
+						
+						</c:forEach>
+					</table> </div> 
+					</fieldset> </center>
+		
 		</div>
 	</div>
 
