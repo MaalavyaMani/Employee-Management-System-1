@@ -9,19 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.employee.bean.LeaveSheet;
+import com.employee.bean.AdminApplyLeave;
 
 /**
- * Servlet implementation class LeaveSheetServlet
+ * Servlet implementation class AdminLeaveSheetServlet
  */
-@WebServlet("/LeaveSheetServlet")
-public class LeaveSheetServlet extends HttpServlet {
+@WebServlet("/AdminLeaveSheetServlet")
+public class AdminLeaveSheetServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
-    public LeaveSheetServlet() {
+    public AdminLeaveSheetServlet() {
+        super();
         // TODO Auto-generated constructor stub
     }
 
@@ -29,14 +30,15 @@ public class LeaveSheetServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
+response.setContentType("text/html");
 		
 		String category = request.getParameter("category");
 		String fromDate = request.getParameter("from_date");
@@ -45,7 +47,7 @@ public class LeaveSheetServlet extends HttpServlet {
 		String emp_id = request.getParameter("empid");
 		System.out.println(emp_id);
 		
-		LeaveSheet ls = new LeaveSheet();
+		AdminApplyLeave ls = new AdminApplyLeave();
 		ls.setCategory(category);
 		ls.setFromDate(fromDate);
 		ls.setToDate(toDate);
@@ -53,8 +55,9 @@ public class LeaveSheetServlet extends HttpServlet {
 		ls.setEmp_id(emp_id);
 		ls.saveData();
 		
-		RequestDispatcher rd = request.getRequestDispatcher("EmpPage.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("AdminPage.jsp");
 		rd.forward(request, response);
+
 	}
 
 }

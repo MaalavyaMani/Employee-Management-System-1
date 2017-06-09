@@ -1,10 +1,12 @@
 package com.employee.bean;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import com.employee.util.DataBaseUtility;
 
-public class LeaveSheet {
+public class ApplyLeave {
 	private String category;
 	private String fromDate;
 	private String toDate;
@@ -51,9 +53,7 @@ public class LeaveSheet {
 			System.out.println("executing");
 		}catch (SQLException e) {
 			e.printStackTrace();
-		}
-			
-	
+		}	
 	}
-	
 }
+

@@ -110,8 +110,9 @@
     </div>
    <br>
    
-   <table  align = "center">
    <form method = "post" action = "EmployeeRegisterServlet">
+   <table  align = "center">
+   
      <tr>
 	 <td>Employee ID :<hspace> </td>
 	 <td><input type="text" name="emp_id"  placeholder = "Eg.TU0001"></td>
@@ -230,7 +231,15 @@
       <h1>Apply Leave</h1>
     </div>
    <br>
+   <% 
+   String emp = (String) session.getAttribute("empid");
+   %>
+   
+   <form method = "post" action = "AdminLeaveSheetServlet">
 <table align=center style="width:65%">
+
+   
+
   <tr align = center>
     <td>Category :</td>
     <td><input list="category" name="category">
@@ -252,11 +261,17 @@
    <td><input type="text" name="Reason"  placeholder = "">  </td>
 </tr>
 
+<tr>
+<td><input type = "hidden" name = "empid" value = "<%=emp%>"></td>
+</tr>
+
+
 </table>
 <br>
 <center><button type="submit" align = center class="w3-button w3-black ">Apply</button> </center>
-</div>
+</form>
 
+</div>
 </div>
 </div>
 </div>

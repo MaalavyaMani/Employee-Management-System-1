@@ -155,13 +155,16 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <option value="Training"> 
   </datalist>
   </td>
+  
   <td>
     <input type="text" name="hours1"  placeholder = "00:00">
   </td>
+  
   <td>
     <input type="text" name="description1">
   </td>
   </tr>
+  
   <tr align = center>
   <td><input list="2" name="2">
   <datalist id="2">
