@@ -1,6 +1,7 @@
 package com.employee.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -44,10 +45,11 @@ public class ChangePasswordServlet extends HttpServlet {
 		String emp_id = request.getParameter("empid");
 		String newpassword = request.getParameter("newpassword");
 		System.out.println(emp_id);
+		PrintWriter out = response.getWriter();
 		
-		LoginBean loginbean = new LoginBean();
+		LoginBean loginBean = new LoginBean();
 		 
-		loginbean.setEmpID(emp_id);
+		loginBean.setEmpID(emp_id);
 		
         LoginDAO loginDAO = new LoginDAO();
 		
@@ -58,6 +60,8 @@ public class ChangePasswordServlet extends HttpServlet {
 		cp.setEmpID(emp_id);
 		cp.setNewPassword(newpassword);
         cp.saveData();
+               
+        
         RequestDispatcher rd = request.getRequestDispatcher("ChangePassword.jsp");
 		rd.forward(request, response);
 	}

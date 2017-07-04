@@ -7,6 +7,17 @@
 <%@ page import = "com.employee.bean.LoginBean"%>
 <%@ page import = "java.sql.*" %>
 
+   <%
+   if(session.getAttribute("empid")== null) {
+      response.sendRedirect(request.getContextPath() +"/AdminPage.jsp");
+   }
+  response.setHeader("Cache-Control","no-cache");
+  response.setHeader("Cache-Control","no-store");
+  response.setHeader("Pragma","no-cache");
+  response.setDateHeader ("Expires", 0);
+ 
+%>
+
 <!DOCTYPE html>
 <html>
 <title>AdminPage</title>
@@ -477,18 +488,6 @@
 </div>
 
 
-<%@page import="java.util.*" %>
-<%
-        try {
-        if (session.getAttribute("empid").equals("")) {
-        	request.getRequestDispatcher("AdminPagejsp").forward(request, response);
-        } else {
-        	request.getRequestDispatcher("Login.jsp").forward(request, response);
-        }
-        } catch (Exception e) {
-
-        }
-    %>
 
 <br><br><br><br><br>
 <footer class="w3-container w3-black w3-center  w3-margin-top">

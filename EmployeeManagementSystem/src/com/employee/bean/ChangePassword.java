@@ -37,6 +37,7 @@ public class ChangePassword {
 				try {
 					connection = DataBaseUtility.getConnection();
 					Statement statement = connection.createStatement();
+					System.out.println(getEmpID());
 					System.out.println(getNewPassword());
 					statement.executeUpdate(" update employee set password = MD5('" + getNewPassword() + "') where emp_id = '"+empID+"' ");
 		         

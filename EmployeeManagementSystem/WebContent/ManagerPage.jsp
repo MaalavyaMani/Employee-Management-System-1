@@ -7,6 +7,18 @@
 <%@ page import="com.employee.bean.LoginBean"%>
 <%@ page import="java.sql.*"%>
 
+<%
+   if(session.getAttribute("empid")== null) {
+      response.sendRedirect(request.getContextPath() +"/ManagerPage.jsp");
+   }
+  response.setHeader("Cache-Control","no-cache");
+  response.setHeader("Cache-Control","no-store");
+  response.setHeader("Pragma","no-cache");
+  response.setDateHeader ("Expires", 0);
+ 
+%>
+
+
 <!DOCTYPE html>
 <html>
 <title>ManagerPage</title>

@@ -7,6 +7,16 @@
 <%@ page import = "com.employee.bean.LoginBean"%>
 <%@ page import = "java.sql.*" %>
 
+<%
+   if(session.getAttribute("empid")== null) {
+      response.sendRedirect(request.getContextPath() +"/ManagerPage.jsp");
+   }
+  response.setHeader("Cache-Control","no-cache");
+  response.setHeader("Cache-Control","no-store");
+  response.setHeader("Pragma","no-cache");
+  response.setDateHeader ("Expires", 0);
+ 
+%>
 
     <!DOCTYPE html>
 <html>
@@ -299,7 +309,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       <h1>Apply Leave</h1>
     </div>
    <br>
-   <form method = "post" action = "LeaveSheetServlet">
+     <form method = "post" action = "LeaveSheetServlet"> 
 <table align=center style="width:65%">
   <tr align = center>
     <td>Category :</td>
@@ -533,9 +543,13 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 					class="w3-button w3-display-topright w3-large">x</span>
 				<h1>Project Details</h1>
 			</div>
+			
+			<% java.util.Date now = new java.util.Date();
+			System.out.println(now);
+			%>
 		
 		<sql:query dataSource = "${dbSource}" var = "timesheet" >
-           select task_name , project_id , num_of_hours , date , description  from time_sheet  where date = "2017-07-03" && emp_id = "<%= session.getAttribute("empid") %>"; 
+           select task_name , project_id , num_of_hours , date , description  from time_sheet  where emp_id = "<%= session.getAttribute("empid") %>" ORDER BY date DESC; 
       </sql:query> 
 		
 		<center>
