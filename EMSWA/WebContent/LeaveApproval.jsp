@@ -162,6 +162,7 @@ ResultSet resultSet = null;
 <td><b>To Date</b></td>
 <td><b>Reason</b></td>
 <td><b>Approve</b></td>
+<td><b>Reject</b></td>
 
 </tr>
 <%
@@ -177,14 +178,15 @@ System.out.println("Executing Query");
 resultSet = statement.executeQuery("select * from leave_sheet ls INNER JOIN employee emp on ls.emp_id = emp.emp_id and ls.approved = '"+waiting+"' where emp.emp_id IN (select emp.emp_id from employee emp where manager_id = '"+value+"' )" );
 while(resultSet.next()){
 %>
-<form action = "LeaveApprovalServlet" method = "post">
+<form action = "LeaveApprovalServlet" method = "post">	
 <tr>
 <td><%=resultSet.getString(5) %></td>
 <td><%=resultSet.getString(2) %></td>
 <td><%=resultSet.getString(3) %></td>
 <td><%=resultSet.getString(4) %></td>
 <%String id = resultSet.getString(5);%>
-<td><button type = "submit" onclick="" name = "id" value = "<%= id %>">Approve</a></button></td>
+<td><button type = "submit" onclick="" name = "appid" value = "<%= id %>">Approve</a></button></td>
+<td><button type = "submit" onclick="" name = "rejid" value = "<%= id %>">Reject</a></button></td>
 <% System.out.println(id);%>
 </tr>
 </form>
